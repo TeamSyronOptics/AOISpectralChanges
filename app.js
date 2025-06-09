@@ -100,23 +100,33 @@ function updateAll() {
 
     // Spectrum range: ±30 nm around λ₀
     const spectrum = generateSpectrum(shiftedCwl, fwhm, lambda0 - 30, lambda0 + 30);
+    const baseline = generateSpectrum(lambda0, fwhm, lambda0 - 30, lambda0 + 30);
 
-    const trace = {
+    const traceBaseline = {
+        x: baseline.x,
+        y: baseline.y,
+        mode: 'lines',
+        line: {color: '#bbb', width: 3, dash: 'dash'},
+        name: 'Baseline (AOI = 0°)',
+        opacity: 0.7
+    };
+    const traceShifted = {
         x: spectrum.x,
         y: spectrum.y,
         mode: 'lines',
         line: {color: '#e4572e', width: 3},
         fill: 'tozeroy',
-        name: 'Transmission'
+        name: `Shifted (AOI = ${aoi}°)`
     };
     const layout = {
         title: '',
         xaxis: {title: 'Wavelength (nm)', range: [lambda0 - 30, lambda0 + 30]},
         yaxis: {title: 'Transmission (%)', range: [0, 105]},
         margin: {t: 20, r: 20, l: 60, b: 60},
-        showlegend: false
+        legend: {orientation: 'h', x: 0.5, xanchor: 'center', y: -0.18},
+        showlegend: true
     };
-    Plotly.newPlot('plot', [trace], layout, {responsive: true, displayModeBar: false});
+    Plotly.newPlot('plot', [traceBaseline, traceShifted], layout, {responsive: true, displayModeBar: false});
 
     // Draw AOI animation
     drawAOICanvas(aoi);
