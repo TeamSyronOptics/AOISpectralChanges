@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AOI Spectral Shift Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Bandpass Filter AOI Spectral Shift</h1>
+        <div class="controls">
+            <label for="aoi-slider">Angle of Incidence (AOI): <span id="aoi-value">0</span>°</label>
+            <input type="range" id="aoi-slider" min="0" max="45" value="0" step="1">
+        </div>
+        <div class="info">
+            <span>Center Wavelength (λ₀): 650 nm</span> | <span>Effective Index (nₑ): 2.2</span><br>
+            <span>Shifted Center Wavelength: <span id="shifted-cwl">650</span> nm</span>
+        </div>
+        <canvas id="aoi-canvas" width="400" height="180"></canvas>
+        <div id="plot" class="plot"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
